@@ -7,9 +7,6 @@ Alunos: Rafael de Vasconcelos Costa, Pedro Henrique Rodrigues Moy
 #include <iostream>
 #include <string>
 #include <fstream>
-#ifdef _WIN32
-    #include <windows.h>
-#endif
 using namespace std;
 
 typedef struct Animal {
@@ -35,10 +32,6 @@ void gravacao();
 
 
 int main(){
-	#ifdef _WIN32
-        SetConsoleOutputCP(65001);
-        SetConsoleCP(65001);
-    #endif
 	ifstream arq("animais.csv");
 	int i = 0, capacidade = 40;
 	string aux;
@@ -71,7 +64,7 @@ int main(){
 	int x = 0;
 
 	do {
-		cout << "=============================================" << endl;
+		cout << endl << "=============================================" << endl;
 		cout << "O que você deseja fazer?" << endl;
 		cout << "=============================================" << endl;
 		cout << "1. Listar Animais" << endl;
@@ -106,7 +99,8 @@ int main(){
 			case 0:
 				break;
 			default:
-				cout << endl << "Entrada inválida, tente novamente." << endl << endl;
+				cout << endl << "Entrada inválida, tente novamente." << endl;
+				break;
 		}
 	} while (x != 0);
 
@@ -114,15 +108,16 @@ int main(){
 }
 
 void busca(){
-	cout << "=============================================" << endl;
+	cout << endl << "=============================================" << endl;
 	cout << "1. Busca por ID" << endl;
 	cout << "2. Busca por nome" << endl;
 	cout << "3. Busca por espécie" << endl;
 	cout << "4. Busca por vacina" << endl;
 	cout << "0. Cancelar" << endl;
 	cout << "=============================================" << endl;
-	int busca = 0;
-	switch (busca) {
+	int n;
+	cin >> n;
+	switch (n) {
 		case 1:
 			buscaId();
 			break;
@@ -138,6 +133,9 @@ void busca(){
 		case 0:
 			break;
 		default:
+			cout << endl << "Entrada inválida, tente novamente." << endl << endl;
+			busca();
+			break;
 	}
 }
 void buscaId(){
